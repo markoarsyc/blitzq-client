@@ -1,10 +1,9 @@
+import LoginPage from './LoginPage';
 import './Styles/App.css';
 
 function App() {
   return (
-    <div className="App">
-      Let's go!
-    </div>
+    <LoginPage />
   );
 }
 

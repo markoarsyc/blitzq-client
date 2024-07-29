@@ -1,0 +1,38 @@
+import React from "react";
+import "./Styles/LoginPage.css";
+
+//slike
+import loginImgUrl from "./Media/Login-page-img.png";
+
+//Form submission
+const handleSubmit = (e) => {
+  e.preventDefault();
+};
+
+const LoginPage = () => {
+  return (
+    <div className="login-page-wrapper">
+      <div className="login-img">
+        <img src={loginImgUrl} alt="login-img" />
+      </div>
+      <div className="login-form">
+        <form onSubmit={handleSubmit}>
+          <h1> Prijava </h1>
+          <div className="input-element">
+            <label htmlFor="korisnickoime"> Korisničko ime </label>
+            <input type="text" name="korisnickoime" />
+          </div>
+          <div className="input-element">
+            <label htmlFor="lozinka"> Lozinka </label>
+            <input type="password" name="lozinka" />
+          </div>
+          <button type="submit"> Prijavi se </button>
+          <p className="additional-form-text"> Nemaš nalog? </p>
+          <button> Registruj se </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;
