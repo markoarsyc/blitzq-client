@@ -1,15 +1,22 @@
 import React from "react";
 import "./Styles/LoginPage.css";
+import { useNavigate } from "react-router-dom";
 
 //slike
 import loginImgUrl from "./Media/Login-page-img.png";
 
-//Form submission
-const handleSubmit = (e) => {
-  e.preventDefault();
-};
-
 const LoginPage = () => {
+  //Form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  //navigation to registration page
+  const navigate = useNavigate();
+  const handleNavigate = ()=> {
+    navigate('/registration')
+  }
+
   return (
     <div className="login-page-wrapper">
       <div className="login-img">
@@ -28,7 +35,7 @@ const LoginPage = () => {
           </div>
           <button type="submit"> Prijavi se </button>
           <p className="additional-form-text"> Nemaš nalog? </p>
-          <button> Registruj se </button>
+          <button onClick={handleNavigate}> Registruj se </button>
         </form>
       </div>
     </div>
