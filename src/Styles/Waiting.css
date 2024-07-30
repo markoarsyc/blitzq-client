@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
+
+.waiting-wrapper {
+    font-family: Orbitron;
+    background-image: url("../Media/Waiting-background.png");
+    background-size: contain;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    color:#F5FDFF;
+    text-shadow: -1.5px -1.5px 0 #003D97, 1.5px -1.5px 0 #003D97,
+    -1.5px 1.5px 0 #003D97, 1.5px 1.5px 0 #003D97;
+
+}
+
+.waiting-images {
+    font-family: Teko;
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+}
+
+.waiting-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:3rem;
+}
+
+.waiting-image img {
+    width: 8rem;
+    height: 8rem;
+}

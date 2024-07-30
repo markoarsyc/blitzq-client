@@ -1,57 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
 
-.reg-page-wrapper {
-  background-image: url("../Media/Registration-page.png");
+.reg-page-main-wrapper {
+  background-image: url("../Media/Registration-bg.png");
   background-size: cover;
   width: 100vw;
   height: 100vh;
+}
+
+.reg-page-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
+  justify-items: center;
+  margin-top: 1rem;
   font-family: Orbitron;
 }
 
-nav {
-  margin: 0 3rem;
-  display: flex;
-  flex-direction: row;
-  color: #fff;
-  justify-content: space-between;
-  align-self: stretch;
-}
-
-nav .our-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem;
-  padding: 1rem;
-}
-
-nav .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5rem;
-  padding: 1rem;
-}
-
-nav h2 {
-  margin: 0.7rem;
+.reg-page-wrapper img {
+  width: 22.5vw;
+  height: 60vh;
+  margin: 3rem;
 }
 
 .reg-page-wrapper form {
-  margin-top: 2rem;
+  background-color: #02264E;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("../Media/Reg-form-bg.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   font-size: 1.2rem;
   border: 0.1rem solid #fff;
   border-radius: 10px;

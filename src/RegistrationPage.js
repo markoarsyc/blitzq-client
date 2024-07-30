@@ -1,37 +1,23 @@
 import React from "react";
 import "./Styles/RegistrationPage.css";
-import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 //slike
-import logo from "./Media/logo.png";
-import avatar from "./Media/User-avatar.png";
+import formBg from "./Media/Reg-form-bg.jpeg"
+
 
 const RegistrationPage = () => {
+  
+  //form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
-
-    //navigacija do stranice za prijavu
-    const navigate = useNavigate();
-    const handleNavigate = ()=> {
-        navigate("/");
-    }
-
-    //form submission
-    const handleSubmit = (e)=> {
-        e.preventDefault();
-    }
-
-    return (
+  return (
+    <div className="reg-page-main-wrapper">
+    <Navbar />
     <div className="reg-page-wrapper">
-      <nav>
-        <div className="our-logo">
-          <img src={logo} alt='blitzqlogo'/>
-          <h2> BlitzQ</h2>
-        </div>
-        <div className="login" onClick={handleNavigate}>
-          <h2> Prijavi se </h2>
-          <img src={avatar} alt="avatarlogo" />
-        </div>
-      </nav>
+      <img src={formBg} alt='form-bg' />
       <form onSubmit={handleSubmit}>
         <h1> Registracija </h1>
         <label htmlFor="ime">Ime</label>
@@ -47,6 +33,8 @@ const RegistrationPage = () => {
         <button type="submit"> Registruj se </button>
       </form>
     </div>
+    </div>
+    
   );
 };
 

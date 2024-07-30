@@ -38,6 +38,7 @@
 .login-form form p {
   align-self: flex-start;
   margin: 0.15rem;
+  margin-left: 0.35rem;
 }
 
 .login-form .input-element {
