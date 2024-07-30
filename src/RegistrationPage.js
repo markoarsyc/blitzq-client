@@ -22,12 +22,12 @@ const RegistrationPage = () => {
     <div className="reg-page-wrapper">
       <nav>
         <div className="our-logo">
-          <img src={logo} />
+          <img src={logo} alt='blitzqlogo'/>
           <h2> BlitzQ</h2>
         </div>
         <div className="login" onClick={handleNavigate}>
           <h2> Prijavi se </h2>
-          <img src={avatar} />
+          <img src={avatar} alt="avatarlogo" />
         </div>
       </nav>
       <form onSubmit={handleSubmit}>
