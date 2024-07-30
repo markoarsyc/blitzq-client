@@ -1,8 +1,10 @@
 import React from "react";
 import "./Styles/RegistrationPage.css";
+import { useNavigate } from "react-router-dom";
+
+//slike
 import logo from "./Media/logo.png";
 import avatar from "./Media/User-avatar.png";
-import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
 

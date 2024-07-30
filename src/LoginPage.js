@@ -13,9 +13,9 @@ const LoginPage = () => {
 
   //navigation to registration page
   const navigate = useNavigate();
-  const handleNavigate = ()=> {
-    navigate('/registration')
-  }
+  const handleNavigate = () => {
+    navigate("/registration");
+  };
 
   return (
     <div className="login-page-wrapper">
