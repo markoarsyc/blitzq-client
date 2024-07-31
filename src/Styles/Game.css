@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
+
+.game-main-wrapper {
+    font-family: Orbitron;
+    background-color: #02264E;
+    height: 100vh;
+    width: 100vw;
+    color:#fff;
+}
+
+.game-wrapper {
+    margin: 0rem 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #FF319C;
+    box-shadow: 0 0 10px 2px #FF319C;
+}
+
+.input-side {
+    font-family: Teko;
+    display: flex;
+    flex-direction: column;
+    margin:1rem;
+}
+
+.words {
+    margin:1rem;
+    padding:0.5rem;
+    border:2px solid #7DE0FF;
+    box-shadow: 0 0 10px 2px #7DE0FF;
+    min-width: 20vw;
+    min-height: 20vh;
+    text-align: center;
+}
+
+.input-side form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-side form label {
+    font-size: 2rem;
+}
+
+.input-side form input {
+    color:#fff;
+    font-size: 1.5rem;
+    font-family: Teko;
+    margin: 0.5rem;
+    background-color: transparent;
+    border:2px solid #7DE0FF;
+    box-shadow: 0 0 10px 2px #7DE0FF;
+    border-radius:0.5rem;
+}
+
+.stats-side {
+    margin:1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.timer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.timer h2 {
+    padding: 0.5rem;
+    border:2px solid #7DE0FF;
+    box-shadow: 0 0 10px 2px #7DE0FF;
+    border-radius:0.5rem;
+    margin: 0.5rem;
+}
+
+.category h1{
+    margin:0.5rem;
+    padding: 0.5rem;
+    border: 2px solid #7DE0FF;
+    box-shadow: 0 0 10px 2px #7DE0FF;
+}
+
+.points {
+    margin:1rem;
+    border: 2px solid #FF319C;
+    box-shadow: 0 0 10px 2px #FF319C;
+    padding:2rem;
+}
