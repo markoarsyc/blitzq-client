@@ -9,7 +9,7 @@ import avatar from "./Media/User-avatar.png";
 const Waiting = () => {
   return (
     <div className="waiting-wrapper">
-      <Navbar />
+      <Navbar username="Korisničko ime" route="/profile"/>
       <div className="waiting-images">
         <div className="waiting-image">
           <img src={avatar} alt="avatar" />
