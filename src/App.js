@@ -14,8 +14,8 @@ function App() {
       <Route path="registration" element={<RegistrationPage />} />
       <Route path="homepage" element={<Homepage />} />
       <Route path="waiting" element={<Waiting />} />
-      <Route path="game" element={<Game/>} />
-      <Route path="profile" element={<Profile/>} />
+      <Route path="game" element={<Game />} />
+      <Route path="profile" element={<Profile />} />
     </Routes>
   );
 }

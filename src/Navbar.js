@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "./Media/logo.png";
 import avatar from "./Media/User-avatar.png";
 
-const Navbar = ({username, route}) => {
+const Navbar = ({ username, route }) => {
   //navigacija do stranice za prijavu
   const navigate = useNavigate();
   const handleNavigate = () => {

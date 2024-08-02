@@ -21,7 +21,6 @@ const Game = () => {
   let [score2, setScore2] = useState(0);
   let [score3, setScore3] = useState(0);
 
-
   //timer - smanjuje od 30 do 0 svake sekunde, a nakon toga se resetuje sto oznacava pocetak nove runde
   useEffect(() => {
     if (timerValue > 0) {
@@ -31,7 +30,6 @@ const Game = () => {
       return () => clearInterval(interval);
     }
   }, [timerValue]);
-
 
   //logika sta se to desi kada istekne vreme
   useEffect(() => {
@@ -67,7 +65,7 @@ const Game = () => {
     //proverava da li su unete prazne reci
     if (userWord.trim() !== "") {
       setUserWords((prevWords) => [...prevWords, userWord]);
-      setWordCount((prevWordCount)=> prevWordCount + 1)
+      setWordCount((prevWordCount) => prevWordCount + 1);
     }
     //reset polja za unos nakon svakog unosa
     setUserWord("");
@@ -99,17 +97,23 @@ const Game = () => {
         </div>
         <div className="stats-side">
           <div className="round">
-            <img src={roundColor} alt='roundColor' />
-            <img src={round > 1 ? roundColor : roundBlanco} alt='roundBlanco' />
-            <img src={round > 2 ? roundColor : roundBlanco} alt='roundBlanco' />
+            <img src={roundColor} alt="roundColor" />
+            <img src={round > 1 ? roundColor : roundBlanco} alt="roundBlanco" />
+            <img src={round > 2 ? roundColor : roundBlanco} alt="roundBlanco" />
           </div>
           <div className="timer">
-            { !gameOver ? timedOut ? <h2> Vreme je isteklo </h2> :
-              <>
-                <h2>Vreme</h2>
-                <h2>{timerValue}</h2>
-              </> : <h2> Igra je gotova </h2>
-            }
+            {!gameOver ? (
+              timedOut ? (
+                <h2> Vreme je isteklo </h2>
+              ) : (
+                <>
+                  <h2>Vreme</h2>
+                  <h2>{timerValue}</h2>
+                </>
+              )
+            ) : (
+              <h2> Igra je gotova </h2>
+            )}
           </div>
           <div className="category">
             <h1>Kategorija</h1>
