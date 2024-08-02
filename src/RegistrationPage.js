@@ -15,7 +15,7 @@ const RegistrationPage = () => {
 
   return (
     <div className="reg-page-main-wrapper">
-    <Navbar />
+    <Navbar username="Prijavi se" route="/"/>
     <div className="reg-page-wrapper">
       <img src={formBg} alt='form-bg' />
       <form onSubmit={handleSubmit}>

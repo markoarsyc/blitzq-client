@@ -75,7 +75,7 @@ const Game = () => {
 
   return (
     <div className="game-main-wrapper">
-      <Navbar />
+      <Navbar username="Korisničko ime" route="/profile" />
       <div className="game-wrapper">
         <div className="input-side">
           <div className="words">

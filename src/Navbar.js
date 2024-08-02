@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import logo from "./Media/logo.png";
 import avatar from "./Media/User-avatar.png";
 
-const Navbar = () => {
+const Navbar = ({username, route}) => {
   //navigacija do stranice za prijavu
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/");
+    navigate(route);
   };
 
   return (
@@ -19,7 +19,7 @@ const Navbar = () => {
         <h2> BlitzQ</h2>
       </div>
       <div className="login" onClick={handleNavigate}>
-        <h2> Prijavi se </h2>
+        <h2> {username} </h2>
         <img src={avatar} alt="avatarlogo" />
       </div>
     </nav>
