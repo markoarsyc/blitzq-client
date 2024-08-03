@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+
+.profile-main-wrapper {
+  background-color: #02264e;
+  width: 100vw;
+  height: 100vh;
+  font-family: Orbitron;
+}
+
+.profile-wrapper {
+  font-family: Teko;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0.1rem solid #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(35, 205, 240, 1);
+}
