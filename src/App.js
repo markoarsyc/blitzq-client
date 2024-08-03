@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Waiting from "./Waiting";
 import Game from "./Game";
 import Profile from "./Profile";
+import Score from "./Score";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="waiting" element={<Waiting />} />
       <Route path="game" element={<Game />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="score" element={<Score />} />
     </Routes>
   );
 }
