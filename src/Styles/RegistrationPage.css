@@ -80,4 +80,12 @@
   margin-top: 1rem;
   flex-shrink: 0;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reg-page-wrapper form button:hover {
+  background-color: #f0790c;
+  color: #02264e;
+  box-shadow: 0 0 20px rgba(240, 121, 12, 0.8);
+  transform: scale(1.05);
 }

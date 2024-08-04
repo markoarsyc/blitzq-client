@@ -83,4 +83,12 @@
   flex-shrink: 0;
   cursor: pointer;
   margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #e233a6;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(226, 51, 166, 0.8);
+  transform: scale(1.05);
 }
