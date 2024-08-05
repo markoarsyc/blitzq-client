@@ -7,6 +7,7 @@ import Waiting from "./Waiting";
 import Game from "./Game";
 import Profile from "./Profile";
 import Score from "./Score";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="game" element={<Game />} />
       <Route path="profile" element={<Profile />} />
       <Route path="score" element={<Score />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
