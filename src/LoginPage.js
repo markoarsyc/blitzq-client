@@ -13,8 +13,8 @@ const LoginPage = () => {
 
   //navigation to registration page
   const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/registration");
+  const handleNavigate = (route) => {
+    navigate(route);
   };
 
   return (
@@ -33,9 +33,13 @@ const LoginPage = () => {
             <label htmlFor="lozinka"> Lozinka </label>
             <input type="password" name="lozinka" />
           </div>
-          <button type="submit"> Prijavi se </button>
+          <button type="submit" onClick={()=>{
+            handleNavigate('homepage');
+          }}> Prijavi se </button>
           <p className="additional-form-text"> Nemaš nalog? </p>
-          <button onClick={handleNavigate}> Registruj se </button>
+          <button onClick={()=>{
+            handleNavigate('registration');
+          }}> Registruj se </button>
         </form>
       </div>
     </div>

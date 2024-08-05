@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
+
+.homepage-main-wrapper {
+  background-image: url("./../Media/Homepage-bg.png");
+  background-color: #02264e;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homepage-main-wrapper button {
+  text-align: center;
+  font-family: Orbitron;
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: 3rem;
+  text-align: center;
+  background-color: transparent;
+  border: 0.1rem solid #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(35, 205, 240, 1);
+  cursor: pointer;
+  padding: 1rem 9rem;
+  color: #fff;
+  transition: all 0.3s ease;
+
+}
+
+.homepage-main-wrapper button:hover {
+  background-color: #e233a6;
+  color: #02264e;
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(226, 51, 166, 0.8);
+}
