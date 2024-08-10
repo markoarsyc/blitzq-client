@@ -9,7 +9,7 @@ import opponentImage from "./Media/Opponent-avatar.png";
 const Score = () => {
   return (
     <div className="score-main-wrapper">
-      <Navbar username="Korisničko ime" route="score" />
+      <Navbar username="Korisničko ime" route="/profile" />
       <div className="image-wrapper">
         <div className="user-image">
           <img src={userImage} alt="userImage" />
