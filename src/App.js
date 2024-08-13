@@ -24,7 +24,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="registration" element={<RegistrationPage />} />
+      <Route path="registration" element={<RegistrationPage socket={socket} />} />
       <Route path="homepage" element={<Homepage />} />
       <Route path="waiting" element={<Waiting socket={socket} />} />
       <Route path="game" element={<Game />} />
