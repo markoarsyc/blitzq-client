@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import "../Styles/Waiting.css";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
+import { useSocket } from "../Contexts/SocketContext";
 
 //slike
 import opponentAvatar from "../Media/Opponent-avatar.png";
 import avatar from "../Media/User-avatar.png";
 
-
-
-const Waiting = ({socket}) => {
+const Waiting = () => {
   const navigate = useNavigate();
-
+  const socket = useSocket();
   useEffect(()=>{
     //Igrac salje zahtev za igru
     socket.emit("waiting-game");

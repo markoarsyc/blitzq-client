@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "../Styles/RegistrationPage.css";
 import Navbar from "../Navbar";
+import { useSocket } from "../Contexts/SocketContext";
 
 // slike
 import formBg from "../Media/Reg-form-bg.jpeg";
 
-const RegistrationPage = ({ socket }) => {
+const RegistrationPage = () => {
+  const socket = useSocket();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
