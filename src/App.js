@@ -1,13 +1,13 @@
-import Homepage from "./Homepage";
-import LoginPage from "./LoginPage";
-import RegistrationPage from "./RegistrationPage";
+import Homepage from "./Pages/Homepage";
+import LoginPage from "./Pages/LoginPage";
+import RegistrationPage from "./Pages/RegistrationPage";
 import "./Styles/App.css";
 import { Route, Routes } from "react-router-dom";
-import Waiting from "./Waiting";
-import Game from "./Game";
-import Profile from "./Profile";
-import Score from "./Score";
-import NotFound from "./NotFound";
+import Waiting from "./Pages/Waiting";
+import Game from "./Pages/Game";
+import Profile from "./Pages/Profile";
+import Score from "./Pages/Score";
+import NotFound from "./Errors/NotFound";
 import {io} from "socket.io-client";
 
 function App() {

@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
-import "./Styles/Game.css";
+import Navbar from "../Navbar";
+import "../Styles/Game.css";
 import { useState, useEffect } from "react";
 
 //slike
-import roundColor from "./Media/Round-color.png";
-import roundBlanco from "./Media/Round-blanco.png";
+import roundColor from "../Media/Round-color.png";
+import roundBlanco from "../Media/Round-blanco.png";
 
 const Game = () => {
   const initialTime = 30;

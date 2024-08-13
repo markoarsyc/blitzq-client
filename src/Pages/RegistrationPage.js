@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./Styles/RegistrationPage.css";
-import Navbar from "./Navbar";
+import "../Styles/RegistrationPage.css";
+import Navbar from "../Navbar";
 
 // slike
-import formBg from "./Media/Reg-form-bg.jpeg";
+import formBg from "../Media/Reg-form-bg.jpeg";
 
 const RegistrationPage = ({ socket }) => {
   const [firstName, setFirstName] = useState("");

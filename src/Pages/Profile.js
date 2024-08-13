@@ -1,6 +1,6 @@
 import React from "react";
-import "./Styles/Profile.css"
-import Navbar from "./Navbar";
+import "../Styles/Profile.css"
+import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {

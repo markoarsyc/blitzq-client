@@ -1,9 +1,9 @@
 import React from "react";
-import "./Styles/LoginPage.css";
+import "../Styles/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 
 //slike
-import loginImgUrl from "./Media/Login-page-img.png";
+import loginImgUrl from "../Media/Login-page-img.png";
 
 const LoginPage = () => {
   //Form submission

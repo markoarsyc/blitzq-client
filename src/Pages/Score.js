@@ -1,10 +1,10 @@
 import React from "react";
-import "./Styles/Score.css";
-import Navbar from "./Navbar";
+import "../Styles/Score.css";
+import Navbar from "../Navbar";
 
 //slike
-import userImage from "./Media/User-avatar.png";
-import opponentImage from "./Media/Opponent-avatar.png";
+import userImage from "../Media/User-avatar.png";
+import opponentImage from "../Media/Opponent-avatar.png";
 
 const Score = () => {
   return (

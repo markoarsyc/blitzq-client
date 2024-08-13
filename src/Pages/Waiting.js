@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import "./Styles/Waiting.css";
-import Navbar from "./Navbar";
+import "../Styles/Waiting.css";
+import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
 
 //slike
-import opponentAvatar from "./Media/Opponent-avatar.png";
-import avatar from "./Media/User-avatar.png";
+import opponentAvatar from "../Media/Opponent-avatar.png";
+import avatar from "../Media/User-avatar.png";
 
 
 
