@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Styles/Waiting.css";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 //slike
 import opponentAvatar from "./Media/Opponent-avatar.png";
 import avatar from "./Media/User-avatar.png";
 
-const Waiting = () => {
+
+
+const Waiting = ({socket}) => {
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    //Igrac salje zahtev za igru
+    socket.emit("waiting-game");
+    //Osluskuje se dogadjaj koji predstavlja pocetak igre
+    socket.on("game-started",()=>{
+      //igra ce krenuti za sekund
+      setTimeout(()=>{
+        navigate("/game");
+      },1000);
+    })
+
+  },[socket,navigate])
   return (
     <div className="waiting-wrapper">
       <Navbar username="Korisničko ime" route="/profile"/>
