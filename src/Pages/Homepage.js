@@ -9,7 +9,7 @@ const Homepage = () => {
 
   return (
     <div className='homepage-main-wrapper'>
-      <Navbar username="Korisnicko ime" route="/profile" />
+      <Navbar route="/profile" />
       <button onClick={()=>{
         navigate("/waiting");
       }}>IGRAJ</button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/RegistrationPage.css";
 import Navbar from "../Navbar";
 import { useSocket } from "../Contexts/SocketContext";
@@ -26,7 +26,9 @@ const RegistrationPage = () => {
       mail: mail,
     };
     socket.emit("register-player", playerCredentials);
+  };
 
+  useEffect(() => {
     //cekamo potvrdu servera da li je uspesna registracija
     socket.on("registration-status", (regStatus) => {
       if (regStatus) {
@@ -41,11 +43,16 @@ const RegistrationPage = () => {
         console.log("Registracija nije uspela");
       }
     });
-  };
+
+    return ()=>{
+      socket.off("registration-status");
+    }
+    
+  }, [socket]);
 
   return (
     <div className="reg-page-main-wrapper">
-      <Navbar username="Prijavi se" route="/" />
+      <Navbar route="/" />
       <div className="reg-page-wrapper">
         <img src={formBg} alt="form-bg" />
         <form onSubmit={handleSubmit}>
