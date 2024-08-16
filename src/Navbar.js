@@ -16,9 +16,7 @@ const Navbar = ({route }) => {
 
   //ucitavanje prijavljenog korisnika
   const {loggedInPlayer} = useContext(LoginContext);
-
-  console.log(loggedInPlayer);
-
+  
   return (
     <nav>
       <div className="our-logo">

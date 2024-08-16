@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../Styles/Waiting.css";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
@@ -14,15 +14,25 @@ const Waiting = () => {
   const socket = useSocket();
   //ucitavamo korisnicko ime ulogovanog korisnika
   const { loggedInPlayer } = useContext(LoginContext);
+
+  //protivnik
+  const [opponentUsername, setOpponentUsername] = useState("Čeka se protivnik")
+
   useEffect(() => {
     //Igrac salje zahtev za igru
     socket.emit("waiting-game");
+
+    //Osluskujemo dogadjaj u kom se salje username protivnika
+    socket.on("opponent-username",(opponent)=>{
+      setOpponentUsername(opponent);
+    })
+
     //Osluskuje se dogadjaj koji predstavlja pocetak igre
     socket.on("game-started", () => {
       //igra ce krenuti za sekund
       setTimeout(() => {
         navigate("/game");
-      }, 1000);
+      }, 5000);
     });
   }, [socket, navigate]);
   return (
@@ -35,7 +45,7 @@ const Waiting = () => {
         </div>
         <div className="waiting-image">
           <img src={opponentAvatar} alt="opponentAvatar" />
-          <h2> Čeka se protivnik </h2>
+          <h2> {opponentUsername} </h2>
         </div>
       </div>
     </div>
