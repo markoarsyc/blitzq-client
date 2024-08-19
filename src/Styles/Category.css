@@ -5,7 +5,7 @@
   background-color: #02264e;
   width: 100vw;
   height: 100vh;
-  font-family: Orbitron;
+  font-family: Teko;
   color: #fff;
 }
 
@@ -13,13 +13,12 @@
     display: flex;
 }
 
-.category-main-wrapper .category-form {
+.category-main-wrapper form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  font-family: Teko;
   background-color: transparent;
   border: 0.1rem solid #fff;
   box-shadow: 0 0 15px #e233a6;
@@ -27,25 +26,25 @@
   color: #fff;
   margin: 0 2rem;
   padding: 2rem;
+  height: 80vh;
 }
 
-.category-main-wrapper .category-form input {
+.category-main-wrapper input {
   background-color: transparent;
   border: 0.01rem solid #fff;
   box-shadow: 0 0 15px #e233a6;
   border-radius: 0.3rem;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
+  font-family: Teko;
   text-align: center;
   color:#fff;
-  font-family: Teko;
   font-size: 1.2rem;
 }
 
-.category-main-wrapper .category-form input::placeholder {
-  color: #fff;
-  opacity: 0.5;
-  font-family: Teko;
+.category-main-wrapper input::placeholder {
+  color:#fff;
+  opacity: 0.7;
 }
 
 .category-main-wrapper button {
@@ -73,27 +72,21 @@
   transform: scale(1.05);
 }
 
-.category-main-wrapper .term-form {
+.category-main-wrapper .terms {
+  padding: 1rem;
+  max-height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  font-family: Teko;
-  background-color: transparent;
-  border: 0.1rem solid #fff;
-  box-shadow: 0 0 15px #e233a6;
-  border-radius: 0.3rem;
-  color: #fff;
-  margin: 0 15rem;
-  padding: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 
-#category-title {
-    font-size: 1.5rem;
+.category-main-wrapper .terms p {
+  margin: 0 0.3rem;
 }
 
-.category-main-wrapper .terms {
-    padding: 6rem;
-    border:1px solid white;
+#main-submit {
+  bottom: 2rem;
+  text-align: center;
+  padding:0 5rem;
 }

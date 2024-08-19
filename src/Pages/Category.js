@@ -1,92 +1,57 @@
-// import React, { useState } from "react";
-// import "../Styles/Category.css";
-// import Navbar from "../Navbar";
-
-// const Category = () => {
-//   const [terms, setTerms] = useState([]);
-//   const [term, setTerm] = useState("");
-//   const [points, setPoints] = useState("");
-
-//   const submitTerm = (e)=> {
-//     e.preventDefault();
-//     const termObject = {term:term, points:points};
-//     setTerms((prevTerms)=>[...prevTerms,termObject]);
-//   }
-
-//   const submitCategory = (e)=> {
-//     e.preventDefault();
-//   }
-
-//   return (
-//     <div className="category-main-wrapper">
-//       <Navbar route="/profile" />
-//       <div className="category-wrapper">
-//         <form className="category-form" onSubmit={submitCategory}>
-//           <input type="text" placeholder="Kategorija" id="category-title" />
-//           <form className="term-form" onSubmit={submitTerm}>
-//             <input
-//               type="text"
-//               placeholder="Pojam"
-//               value={term}
-//               name="term"
-//               onChange={(e) => {
-//                 setTerm(e.target.value);
-//               }}
-//             />
-//             <input
-//               type="text"
-//               placeholder="Poeni"
-//               value={points}
-//               name="points"
-//               onChange={(e) => {
-//                 setPoints(parseInt(e.target.value));
-//               }}
-//             />
-//             <button type="submit">Unesi pojam</button>
-//           </form>
-//           <button type="submit">Unesi kategoriju</button>
-//         </form>
-//         <div className="terms">
-//             {terms.map((t)=>{
-//                 return <p>Pojam: {t.term}, poeni {t.points}</p>
-//             })}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Category;
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/Category.css";
 import Navbar from "../Navbar";
+import { useSocket } from "../Contexts/SocketContext";
+import { useNavigate } from "react-router-dom";
 
 const Category = () => {
+  const socket = useSocket();
   const [terms, setTerms] = useState([]);
   const [term, setTerm] = useState("");
   const [points, setPoints] = useState("");
   const [categoryTitle, setCategoryTitle] = useState("");
+  const [statusFlag,setStatusFlag] = useState(false);
+
+  const navigate = useNavigate();
 
   const submitTerm = (e) => {
     e.preventDefault();
-    const termObject = { term, points: parseInt(points, 10) };
+    const termObject = { term:term.toUpperCase(), points: parseInt(points, 10) };
     setTerms((prevTerms) => [...prevTerms, termObject]);
-    // Clear term and points fields after adding term
     setTerm("");
     setPoints("");
   };
 
-  const submitCategory = (e) => {
-    e.preventDefault();
-    // Add logic to handle category submission here
-    console.log("Category submitted:", categoryTitle);
+  const sendCategory = () => {
+    socket.emit("add-category",{
+      title:categoryTitle,
+      terms:terms
+    });
   };
+
+  useEffect(()=>{
+    socket.on("add-category-status",(status)=>{
+      if(status) {
+        setStatusFlag(true);
+        setTimeout(()=>{
+          navigate("/homepage");
+        },3000);
+      } else {
+        setStatusFlag(false);
+      }
+    })
+  },[socket,statusFlag,navigate])
 
   return (
     <div className="category-main-wrapper">
       <Navbar route="/profile" />
       <div className="category-wrapper">
-        <form className="category-form" onSubmit={submitCategory}>
+        <form
+          className="category-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
           <input
             type="text"
             placeholder="Kategorija"
@@ -94,7 +59,6 @@ const Category = () => {
             value={categoryTitle}
             onChange={(e) => setCategoryTitle(e.target.value)}
           />
-          <button type="submit">Unesi kategoriju</button>
         </form>
         <form className="term-form" onSubmit={submitTerm}>
           <input
@@ -103,6 +67,7 @@ const Category = () => {
             value={term}
             name="term"
             onChange={(e) => setTerm(e.target.value)}
+            required
           />
           <input
             type="number"
@@ -110,18 +75,29 @@ const Category = () => {
             value={points}
             name="points"
             onChange={(e) => setPoints(e.target.value)}
+            required
           />
           <button type="submit">Unesi pojam</button>
         </form>
-        <div className="terms">
-          {terms.map((t, index) => (
-            <p key={index}>Pojam: {t.term}, poeni: {t.points}</p>
-          ))}
-        </div>
+        {statusFlag === false ? <div className="category-user-input-table">
+          <h2>{categoryTitle}</h2>
+          <div className="terms">
+            {terms.map((t, index) => (
+              <p key={index}>
+                {index + 1}. {t.term} ({t.points}p)
+              </p>
+            ))}
+          </div>
+          {terms.length === 0 || (
+            <button id="main-submit" onClick={sendCategory}>
+              {" "}
+              Unesi kategoriju{" "}
+            </button>
+          )}
+        </div> : <h1> Uspešno ste uneli kategoriju </h1>}
       </div>
     </div>
   );
 };
 
 export default Category;
-
