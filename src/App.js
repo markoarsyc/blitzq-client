@@ -11,6 +11,7 @@ import NotFound from "./Errors/NotFound";
 import { SocketProvider } from "./Contexts/SocketContext";
 import { useState } from "react";
 import { LoginContext } from "./Contexts/LoginContext";
+import Category from "./Pages/Category";
 
 function App() {
   const [loggedInPlayer, setLoggedInPlayer] = useState({});
@@ -26,6 +27,7 @@ function App() {
           <Route path="game" element={<Game />} />
           <Route path="profile" element={<Profile />} />
           <Route path="score" element={<Score />} />
+          <Route path="category" element={<Category/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </LoginContext.Provider>

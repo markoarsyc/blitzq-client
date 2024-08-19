@@ -37,3 +37,17 @@
   transform: scale(1.05);
   box-shadow: 0 0 40px rgba(226, 51, 166, 0.8);
 }
+
+.homepage-main-wrapper .category {
+  position: absolute;
+  bottom: 0.7rem;
+  color: #FFFFFF;
+  text-shadow: -1.5px -1.5px 0 #AB5200, 1.5px -1.5px 0 #AB5200,
+    -1.5px 1.5px 0 #AB5200, 1.5px 1.5px 0 #AB5200;
+  font-family: Teko;
+  font-size: 1.5rem;
+}
+
+.homepage-main-wrapper a {
+  color: #FFFFFF;
+}

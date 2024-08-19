@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../Navbar'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import "../Styles/Homepage.css"
 
 
@@ -13,6 +13,7 @@ const Homepage = () => {
       <button onClick={()=>{
         navigate("/waiting");
       }}>IGRAJ</button>
+      <p className='category'>Pomozi nam da poboljšamo igru i <Link to="/category">predloži novu kategoriju</Link></p>
     </div>
   )
 }
