@@ -1,14 +1,17 @@
 import Navbar from "../Navbar";
 import "../Styles/Game.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useSocket } from "../Contexts/SocketContext";
+import { useNavigate } from "react-router-dom";
 
 //slike
 import roundColor from "../Media/Round-color.png";
 import roundBlanco from "../Media/Round-blanco.png";
-import { useSocket } from "../Contexts/SocketContext";
+import { LoginContext } from "../Contexts/LoginContext";
+
 
 const Game = () => {
-  const initialTime = 5;
+  const initialTime = 10;
   const [userWords, setUserWords] = useState([]); //reci koje se prikazuju u polju
   const [userWord, setUserWord] = useState(""); //nova rec iz inputa
   const [timerValue, setTimerValue] = useState(initialTime); //vrednost tajmera
@@ -16,15 +19,70 @@ const Game = () => {
   const [wordCount, setWordCount] = useState(0); //broj unetih reci
   const [round, setRound] = useState(1); //redni broj runde
   const [gameOver, setGameOver] = useState(false); //indikator kraja igre
-  const [categories,setCategories] = useState([]); //ucitane kategorije iz baze
+  const [categories, setCategories] = useState([]); //ucitane kategorije iz baze
   const [roundCategory, setRoundCategory] = useState("Kategorija");
 
   const socket = useSocket();
+  const {loggedInPlayer} = useContext(LoginContext);
+  const navigate = useNavigate();
 
   //poeni po rundama
   const [score1, setScore1] = useState(0);
   const [score2, setScore2] = useState(0);
   const [score3, setScore3] = useState(0);
+
+
+  //funkcija za proveru da li uneta rec postoji u okviru neke kategorije
+  const isLegit = (word, category) => {
+    // Preveravamo da li je `category` definisana i da li sadrži `terms`
+    if (!category || !category.terms) {
+      return false;
+    }
+
+    // Konvertujemo unos i termine u mala slova radi upoređivanja
+    const upperCaseWord = word.toUpperCase();
+
+    // Prolazimo kroz termine i proveravamo da li se unesena reč poklapa sa nekim od termina
+    for (let t of category.terms) {
+      if (upperCaseWord === t.term.toUpperCase()) {
+        return true; // Reč je validna
+      }
+    }
+
+    return false; // Reč nije pronađena u kategoriji
+  };
+
+  //pronadji koliko rec nosi poena
+  const getPoints = (word, category) => {
+    // Preveravamo da li je `category` definisana i da li sadrži `terms`
+    if (!category || !category.terms) {
+      return false;
+    }
+
+    // Konvertujemo unos i termine u mala slova radi upoređivanja
+    const upperCaseWord = word.toUpperCase();
+
+    // Prolazimo kroz termine i proveravamo da li se unesena reč poklapa sa nekim od termina
+    for (let t of category.terms) {
+      if (upperCaseWord === t.term.toUpperCase()) {
+        return t.points; // Reč je validna i ima odredjen broj poena
+      }
+    }
+
+    return 0;
+  };
+
+  //proveri da li je rec vec prethodno unesena
+  const isAlreadyConfirmed = (word, wordsArray) => {
+    const upperCaseWord = word.toUpperCase();
+    for (let w of wordsArray) {
+      if (upperCaseWord === w.toUpperCase()) {
+        return true;
+      }
+    }
+
+    return false;
+  };
 
   //timer - smanjuje od 30 do 0 svake sekunde, a nakon toga se resetuje sto oznacava pocetak nove runde
   useEffect(() => {
@@ -38,7 +96,7 @@ const Game = () => {
 
   //logika sta se to desi kada istekne vreme
   useEffect(() => {
-    setRoundCategory(categories[round-1]?.title);
+    setRoundCategory(categories[round - 1]?.title);
     if (timerValue === 0) {
       setTimedOut(true);
       setTimeout(() => {
@@ -63,22 +121,38 @@ const Game = () => {
         setTimedOut(false); //indikator isteklog vremena se resetuje
       }, 5000);
     }
-  }, [timerValue, round, wordCount,categories]);
+    if (gameOver) {
+      socket.emit("game-over",{
+        player: loggedInPlayer.username,
+        scores: [score1,score2,score3]
+      })
+      setTimeout(()=>{
+        navigate("/score");
+      },3000)
+    }
+  }, [timerValue, round, wordCount, categories,navigate,gameOver,socket,score1,score2,score3,loggedInPlayer]);
 
-  useEffect(()=>{
+  useEffect(() => {
     socket.emit("game-started");
-    socket.on("send-categories",(categoriesArray)=>{
+    socket.on("send-categories", (categoriesArray) => {
       setCategories(categoriesArray);
-    })
-  },[socket])
+    });
+  }, [socket]);
 
   //form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     //proverava da li su unete prazne reci
     if (userWord.trim() !== "") {
-      setUserWords((prevWords) => [...prevWords, userWord]);
-      setWordCount((prevWordCount) => prevWordCount + 1);
+      if (isLegit(userWord, categories[round - 1])) {
+        if (!isAlreadyConfirmed(userWord, userWords)) {
+          setUserWords((prevWords) => [...prevWords, userWord]);
+          setWordCount(
+            (prevWordCount) =>
+              prevWordCount + getPoints(userWord, categories[round - 1])
+          );
+        }
+      }
     }
     //reset polja za unos nakon svakog unosa
     setUserWord("");
@@ -91,7 +165,12 @@ const Game = () => {
         <div className="input-side">
           <div className="words">
             {userWords.map((word, index) => {
-              return <p key={index}> {word} </p>;
+              return (
+                <p key={index}>
+                  {" "}
+                  {word} ({getPoints(word, categories[round - 1])}p){" "}
+                </p>
+              );
             })}
           </div>
           <form onSubmit={handleSubmit}>
