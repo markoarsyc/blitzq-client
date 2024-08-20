@@ -5,21 +5,26 @@ import { useState, useEffect } from "react";
 //slike
 import roundColor from "../Media/Round-color.png";
 import roundBlanco from "../Media/Round-blanco.png";
+import { useSocket } from "../Contexts/SocketContext";
 
 const Game = () => {
-  const initialTime = 30;
-  let [userWords, setUserWords] = useState([]); //reci koje se prikazuju u polju
-  let [userWord, setUserWord] = useState(""); //nova rec iz inputa
-  let [timerValue, setTimerValue] = useState(initialTime); //vrednost tajmera
-  let [timedOut, setTimedOut] = useState(false); //indikator isteka vremena
-  let [wordCount, setWordCount] = useState(0); //broj unetih reci
-  let [round, setRound] = useState(1); //redni broj runde
-  let [gameOver, setGameOver] = useState(false); //indikator kraja igre
+  const initialTime = 5;
+  const [userWords, setUserWords] = useState([]); //reci koje se prikazuju u polju
+  const [userWord, setUserWord] = useState(""); //nova rec iz inputa
+  const [timerValue, setTimerValue] = useState(initialTime); //vrednost tajmera
+  const [timedOut, setTimedOut] = useState(false); //indikator isteka vremena
+  const [wordCount, setWordCount] = useState(0); //broj unetih reci
+  const [round, setRound] = useState(1); //redni broj runde
+  const [gameOver, setGameOver] = useState(false); //indikator kraja igre
+  const [categories,setCategories] = useState([]); //ucitane kategorije iz baze
+  const [roundCategory, setRoundCategory] = useState("Kategorija");
+
+  const socket = useSocket();
 
   //poeni po rundama
-  let [score1, setScore1] = useState(0);
-  let [score2, setScore2] = useState(0);
-  let [score3, setScore3] = useState(0);
+  const [score1, setScore1] = useState(0);
+  const [score2, setScore2] = useState(0);
+  const [score3, setScore3] = useState(0);
 
   //timer - smanjuje od 30 do 0 svake sekunde, a nakon toga se resetuje sto oznacava pocetak nove runde
   useEffect(() => {
@@ -33,6 +38,7 @@ const Game = () => {
 
   //logika sta se to desi kada istekne vreme
   useEffect(() => {
+    setRoundCategory(categories[round-1]?.title);
     if (timerValue === 0) {
       setTimedOut(true);
       setTimeout(() => {
@@ -57,7 +63,14 @@ const Game = () => {
         setTimedOut(false); //indikator isteklog vremena se resetuje
       }, 5000);
     }
-  }, [timerValue, round, wordCount]);
+  }, [timerValue, round, wordCount,categories]);
+
+  useEffect(()=>{
+    socket.emit("game-started");
+    socket.on("send-categories",(categoriesArray)=>{
+      setCategories(categoriesArray);
+    })
+  },[socket])
 
   //form submission
   const handleSubmit = (e) => {
@@ -116,7 +129,7 @@ const Game = () => {
             )}
           </div>
           <div className="category">
-            <h1>Kategorija</h1>
+            <h1>{roundCategory}</h1>
           </div>
           <div className="points">
             <h2> Poeni po rundama: </h2>
