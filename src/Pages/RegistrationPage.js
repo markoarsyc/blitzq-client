@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/RegistrationPage.css";
-import Navbar from "../Navbar";
 import { useSocket } from "../Contexts/SocketContext";
+import { useNavigate } from "react-router-dom";
 
 // slike
 import formBg from "../Media/Reg-form-bg.jpeg";
@@ -14,6 +14,9 @@ const RegistrationPage = () => {
   const [password, setPassword] = useState("");
   const [mail, setMail] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
+
+  const navigate = useNavigate();
+
   // form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,15 +47,13 @@ const RegistrationPage = () => {
       }
     });
 
-    return ()=>{
+    return () => {
       socket.off("registration-status");
-    }
-    
+    };
   }, [socket]);
 
   return (
     <div className="reg-page-main-wrapper">
-      <Navbar route="/" />
       <div className="reg-page-wrapper">
         <img src={formBg} alt="form-bg" />
         <form onSubmit={handleSubmit}>
@@ -104,6 +105,15 @@ const RegistrationPage = () => {
           )}
         </form>
       </div>
+      <button
+        id="login-btn"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        {" "}
+        Prijavi se{" "}
+      </button>
     </div>
   );
 };

@@ -73,7 +73,7 @@ const Game = () => {
 
   return (
     <div className="game-main-wrapper">
-      <Navbar route="/profile" />
+      <Navbar />
       <div className="game-wrapper">
         <div className="input-side">
           <div className="words">

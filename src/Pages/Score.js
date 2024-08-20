@@ -12,7 +12,7 @@ const Score = () => {
   const { loggedInPlayer } = useContext(LoginContext);
   return (
     <div className="score-main-wrapper">
-      <Navbar route="/profile" />
+      <Navbar />
       <div className="image-wrapper">
         <div className="user-image">
           <img src={userImage} alt="userImage" />

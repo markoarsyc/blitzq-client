@@ -37,7 +37,7 @@ const Waiting = () => {
   }, [socket, navigate]);
   return (
     <div className="waiting-wrapper">
-      <Navbar route="/profile" />
+      <Navbar/>
       <div className="waiting-images">
         <div className="waiting-image">
           <img src={avatar} alt="avatar" />

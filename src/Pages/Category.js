@@ -10,41 +10,44 @@ const Category = () => {
   const [term, setTerm] = useState("");
   const [points, setPoints] = useState("");
   const [categoryTitle, setCategoryTitle] = useState("");
-  const [statusFlag,setStatusFlag] = useState(false);
+  const [statusFlag, setStatusFlag] = useState(false);
 
   const navigate = useNavigate();
 
   const submitTerm = (e) => {
     e.preventDefault();
-    const termObject = { term:term.toUpperCase(), points: parseInt(points, 10) };
+    const termObject = {
+      term: term.toUpperCase(),
+      points: parseInt(points, 10),
+    };
     setTerms((prevTerms) => [...prevTerms, termObject]);
     setTerm("");
     setPoints("");
   };
 
   const sendCategory = () => {
-    socket.emit("add-category",{
-      title:categoryTitle,
-      terms:terms
+    socket.emit("add-category", {
+      title: categoryTitle,
+      terms: terms,
     });
   };
 
-  useEffect(()=>{
-    socket.on("add-category-status",(status)=>{
-      if(status) {
+  useEffect(() => {
+    socket.on("add-category-status", (status) => {
+      if (status) {
         setStatusFlag(true);
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate("/homepage");
-        },3000);
+        }, 3000);
       } else {
         setStatusFlag(false);
       }
-    })
-  },[socket,statusFlag,navigate])
+    });
+  }, [socket, statusFlag, navigate]);
 
   return (
     <div className="category-main-wrapper">
-      <Navbar route="/profile" />
+      <Navbar />
       <div className="category-wrapper">
         <form
           className="category-form"
@@ -79,22 +82,26 @@ const Category = () => {
           />
           <button type="submit">Unesi pojam</button>
         </form>
-        {statusFlag === false ? <div className="category-user-input-table">
-          <h2>{categoryTitle}</h2>
-          <div className="terms">
-            {terms.map((t, index) => (
-              <p key={index}>
-                {index + 1}. {t.term} ({t.points}p)
-              </p>
-            ))}
+        {statusFlag === false ? (
+          <div className="category-user-input-table">
+            <h2>{categoryTitle}</h2>
+            <div className="terms">
+              {terms.map((t, index) => (
+                <p key={index}>
+                  {index + 1}. {t.term} ({t.points}p)
+                </p>
+              ))}
+            </div>
+            {terms.length === 0 || (
+              <button id="main-submit" onClick={sendCategory}>
+                {" "}
+                Unesi kategoriju{" "}
+              </button>
+            )}
           </div>
-          {terms.length === 0 || (
-            <button id="main-submit" onClick={sendCategory}>
-              {" "}
-              Unesi kategoriju{" "}
-            </button>
-          )}
-        </div> : <h1> Uspešno ste uneli kategoriju </h1>}
+        ) : (
+          <h1> Uspešno ste uneli kategoriju </h1>
+        )}
       </div>
     </div>
   );
