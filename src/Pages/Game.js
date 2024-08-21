@@ -133,11 +133,11 @@ const Game = () => {
   }, [timerValue, round, wordCount, categories,navigate,gameOver,socket,score1,score2,score3,loggedInPlayer]);
 
   useEffect(() => {
-    socket.emit("game-started");
-    socket.on("send-categories", (categoriesArray) => {
-      setCategories(categoriesArray);
+    socket.emit("game-started",loggedInPlayer);
+    socket.on("game-started", (game) => {
+      setCategories(game.categories);
     });
-  }, [socket]);
+  }, [socket,loggedInPlayer]);
 
   //form submission
   const handleSubmit = (e) => {

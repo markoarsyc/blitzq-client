@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../Styles/Score.css";
 import Navbar from "../Navbar";
 import { LoginContext } from "../Contexts/LoginContext";
@@ -6,10 +6,23 @@ import { LoginContext } from "../Contexts/LoginContext";
 //slike
 import userImage from "../Media/User-avatar.png";
 import opponentImage from "../Media/Opponent-avatar.png";
+import { useSocket } from "../Contexts/SocketContext";
 
 const Score = () => {
   //ucitavamo ulogovanog igraca
   const { loggedInPlayer } = useContext(LoginContext);
+
+  const socket = useSocket();
+
+  useEffect(()=>{
+    socket.emit("score");
+    socket.on("score",(game)=>{
+      console.log("Score received");
+      console.log(game);
+    })
+  },[socket]);
+
+
   return (
     <div className="score-main-wrapper">
       <Navbar />
@@ -23,7 +36,14 @@ const Score = () => {
           <h2>Protivnik</h2>
         </div>
       </div>
-      <div className="score"></div>
+      <div className="score">
+        <div className="my-points">
+          
+        </div>
+        <div className="opponent-points">
+
+        </div>
+      </div>
     </div>
   );
 };

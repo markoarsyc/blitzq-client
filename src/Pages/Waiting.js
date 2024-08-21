@@ -28,11 +28,11 @@ const Waiting = () => {
     })
 
     //Osluskuje se dogadjaj koji predstavlja pocetak igre
-    socket.on("game-started", () => {
-      //igra ce krenuti za sekund
+    socket.on("start-game", () => {
+      //igra ce krenuti za nekoliko sekundi
       setTimeout(() => {
         navigate("/game");
-      }, 5000);
+      }, 3000);
     });
   }, [socket, navigate]);
   return (
