@@ -32,7 +32,7 @@ const Waiting = () => {
       //igra ce krenuti za nekoliko sekundi
       setTimeout(() => {
         navigate("/game");
-      }, 3000);
+      }, 5000);
     });
   }, [socket, navigate]);
   return (

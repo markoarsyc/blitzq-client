@@ -11,7 +11,7 @@ import { LoginContext } from "../Contexts/LoginContext";
 
 
 const Game = () => {
-  const initialTime = 10;
+  const initialTime = 30;
   const [userWords, setUserWords] = useState([]); //reci koje se prikazuju u polju
   const [userWord, setUserWord] = useState(""); //nova rec iz inputa
   const [timerValue, setTimerValue] = useState(initialTime); //vrednost tajmera
