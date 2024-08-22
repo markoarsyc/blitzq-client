@@ -14,23 +14,37 @@ const Score = () => {
 
   const socket = useSocket();
 
-  const [gameScore, setGameScore] = useState({});
+  //parametri partije
+  const [player1, setPlayer1] = useState("");
+  const [player2, setPlayer2] = useState("");
+  const [player1Score, setPlayer1Score] = useState([]);
+  const [player2Score, setPlayer2Score] = useState([]);
+  const [winner, setWinner] = useState("");
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     socket.emit("score");
     socket.on("score", (game) => {
       console.log("Score received");
       console.log(game);
-      setGameScore(game);
+      setPlayer1(game.player1);
+      setPlayer2(game.player2);
+      setPlayer1Score(game.player1Score);
+      setPlayer2Score(game.player2Score);
+      setWinner(game.winner);
+      setCategories(game.categories);
     });
   }, [socket]);
 
   useEffect(() => {
-    if (gameScore.player1Score && gameScore.player2Score) {
-      console.log(gameScore.player1Score, typeof gameScore.player1Score);
-      console.log(gameScore.player2Score, typeof gameScore.player2Score);
+    if (player1 && player2 && player1Score && player2Score && winner) {
+      console.log(player1);
+      console.log(player2);
+      console.log(player1Score);
+      console.log(player2Score);
+      console.log(winner);
     }
-  }, [gameScore]);
+  }, [player1, player2, player1Score, player2Score, winner]);
 
   return (
     <div className="score-main-wrapper">
@@ -42,39 +56,39 @@ const Score = () => {
         </div>
         <div className="user-image">
           <img src={opponentImage} alt="opponentImage" />
-          <h2>
-            {loggedInPlayer.username === gameScore.player1
-              ? gameScore.player2
-              : gameScore.player1}
-          </h2>
+          <h2>{loggedInPlayer.username === player1 ? player2 : player1}</h2>
         </div>
       </div>
       <div className="score">
-        <div className="score-text"> Rezultat partije </div>
+        <h3 className="score-text"> Rezultat partije </h3>
         <div className="my-points">
-          {loggedInPlayer.username === gameScore.player1 ? (
-            <p className="score-array">{gameScore.player1Score} </p>
-          ) : (
-            <p className="score-array">{gameScore.player2Score} </p>
-          )}
+          {loggedInPlayer.username === player1
+            ? player1Score.map((round, index) => {
+                return <p key={index}> {round} </p>;
+              })
+            : player2Score.map((round, index) => {
+                return <p key={index}> {round} </p>;
+              })}
         </div>
         <div className="score-params">
-          <p>Runda 1</p>
-          <p>Runda 2</p>
-          <p>Runda 3</p>
+          {categories.map((category, index) => {
+            return <p key={index}> {category.title} </p>;
+          })}
         </div>
         <div className="opponent-points">
-          {loggedInPlayer.username === gameScore.player1 ? (
-            <p className="score-array">{gameScore.player2Score} </p>
-          ) : (
-            <p className="score-array">{gameScore.player1Score} </p>
-          )}
+        {loggedInPlayer.username === player1
+            ? player2Score.map((round, index) => {
+                return <p key={index}> {round} </p>;
+              })
+            : player1Score.map((round, index) => {
+                return <p key={index}> {round} </p>;
+              })}
         </div>
-        {gameScore.winner &&
+        {winner &&
         <div className="winner">
-          {gameScore.winner === "Nerešeno"
+          {winner === "Nerešeno"
             ? "Nema pobednika"
-            : `Pobednik je ${gameScore.winner}`}
+            : `Pobednik je ${winner}`}
         </div>}
       </div>
     </div>

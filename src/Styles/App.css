@@ -23,6 +23,7 @@ nav .our-logo {
   align-items: center;
   margin: 0.5rem;
   padding: 1rem;
+  cursor: pointer;
 }
 
 nav .login {
