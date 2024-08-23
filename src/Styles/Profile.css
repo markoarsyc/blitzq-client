@@ -3,10 +3,11 @@
 
 .profile-main-wrapper {
   background-color: #02264e;
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  min-height: 100vh;
   font-family: Orbitron;
   color: #fff;
+  padding-bottom: 1rem;
 }
 
 .profile-wrapper {
