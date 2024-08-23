@@ -10,7 +10,7 @@ export const SocketProvider = ({ children }) => {
   const socketRef = useRef(null);
 
   if (!socketRef.current) {
-    socketRef.current = io("http://192.168.1.4:3005");
+    socketRef.current = io("http://localhost:3005");
   }
 
   useEffect(() => {

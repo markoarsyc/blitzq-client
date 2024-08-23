@@ -12,6 +12,8 @@ import { SocketProvider } from "./Contexts/SocketContext";
 import { useState } from "react";
 import { LoginContext } from "./Contexts/LoginContext";
 import Category from "./Pages/Category";
+import ProtectedRoute from "./ProtectedRoute";
+import NotAuthorized from "./Errors/NotAuthorized";
 
 function App() {
   const [loggedInPlayer, setLoggedInPlayer] = useState({});
@@ -22,13 +24,29 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="registration" element={<RegistrationPage />} />
-          <Route path="homepage" element={<Homepage />} />
-          <Route path="waiting" element={<Waiting />} />
-          <Route path="game" element={<Game />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="score" element={<Score />} />
-          <Route path="category" element={<Category/>}/>
+          <Route
+            path="homepage"
+            element={<ProtectedRoute element={<Homepage />} />}
+          />
+          <Route
+            path="waiting"
+            element={<ProtectedRoute element={<Waiting />} />}
+          />
+          <Route path="game" element={<ProtectedRoute element={<Game />} />} />
+          <Route
+            path="profile"
+            element={<ProtectedRoute element={<Profile />} />}
+          />
+          <Route
+            path="score"
+            element={<ProtectedRoute element={<Score />} />}
+          />
+          <Route
+            path="category"
+            element={<ProtectedRoute element={<Category />} />}
+          />
           <Route path="*" element={<NotFound />} />
+          <Route path="notauthorized" element={<NotAuthorized />} />
         </Routes>
       </LoginContext.Provider>
     </SocketProvider>

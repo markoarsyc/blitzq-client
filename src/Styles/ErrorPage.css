@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Teko:wght@300..700&display=swap");
 
-.not-found-wrapper {
+.error-page-wrapper {
   background-color: #02264e;
   width: 100vw;
   height: 100vh;
@@ -14,22 +14,22 @@
   align-items: center;
 }
 
-.not-found-wrapper a {
+.error-page-wrapper a {
   color: rgb(226, 51, 166);
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.not-found-wrapper a:hover {
+.error-page-wrapper a:hover {
     color: #fff;
     text-shadow: 0 0 10px rgb(226, 51, 166);
   }
 
-.not-found-wrapper h1 {
+.error-page-wrapper h1 {
   font-size: 4rem;
   text-shadow: -1.5px -1.5px 0 #e233a6, 1.5px -1.5px 0 #e233a6,
     -1.5px 1.5px 0 #e233a6, 1.5px 1.5px 0 #e233a6;
 }
 
-.not-found-wrapper p {
+.error-page-wrapper p {
   font-size: 2rem;
 }
