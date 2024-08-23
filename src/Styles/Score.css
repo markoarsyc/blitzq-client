@@ -49,6 +49,7 @@
   position:absolute;
   bottom: 1rem;
   font-weight: bolder;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .score-text {
@@ -59,4 +60,9 @@
 .score-array {
   writing-mode: vertical-rl;
   text-orientation: upright;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

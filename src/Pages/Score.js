@@ -24,14 +24,22 @@ const Score = () => {
 
   useEffect(() => {
     socket.emit("score");
-    socket.on("score", (game) => {
+  
+    const handleScore = (game) => {
       setPlayer1(game.player1);
       setPlayer2(game.player2);
       setPlayer1Score(game.player1Score);
       setPlayer2Score(game.player2Score);
       setWinner(game.winner);
       setCategories(game.categories);
-    });
+    }
+    
+    socket.on("score", handleScore);
+
+    return () => {
+      socket.off("score",handleScore);
+    }
+
   }, [socket]);
 
   
