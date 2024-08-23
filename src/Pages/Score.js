@@ -34,6 +34,7 @@ const Score = () => {
     });
   }, [socket]);
 
+  
   return (
     <div className="score-main-wrapper">
       <Navbar />
