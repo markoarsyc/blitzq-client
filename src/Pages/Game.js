@@ -86,13 +86,15 @@ const Game = () => {
 
   //timer - smanjuje od 30 do 0 svake sekunde, a nakon toga se resetuje sto oznacava pocetak nove runde
   useEffect(() => {
-    if (timerValue > 0) {
-      const interval = setInterval(() => {
-        setTimerValue((prevValue) => prevValue - 1);
-      }, 1000);
-      return () => clearInterval(interval);
+    if (categories) {
+      if (timerValue > 0) {
+        const interval = setInterval(() => {
+          setTimerValue((prevValue) => prevValue - 1);
+        }, 1000);
+        return () => clearInterval(interval);
+      }
     }
-  }, [timerValue]);
+  }, [timerValue,categories]);
 
   //logika sta se to desi kada istekne vreme
   useEffect(() => {
