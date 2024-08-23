@@ -25,8 +25,6 @@ const Score = () => {
   useEffect(() => {
     socket.emit("score");
     socket.on("score", (game) => {
-      console.log("Score received");
-      console.log(game);
       setPlayer1(game.player1);
       setPlayer2(game.player2);
       setPlayer1Score(game.player1Score);
@@ -35,16 +33,6 @@ const Score = () => {
       setCategories(game.categories);
     });
   }, [socket]);
-
-  useEffect(() => {
-    if (player1 && player2 && player1Score && player2Score && winner) {
-      console.log(player1);
-      console.log(player2);
-      console.log(player1Score);
-      console.log(player2Score);
-      console.log(winner);
-    }
-  }, [player1, player2, player1Score, player2Score, winner]);
 
   return (
     <div className="score-main-wrapper">
@@ -76,7 +64,7 @@ const Score = () => {
           })}
         </div>
         <div className="opponent-points">
-        {loggedInPlayer.username === player1
+          {loggedInPlayer.username === player1
             ? player2Score.map((round, index) => {
                 return <p key={index}> {round} </p>;
               })
@@ -84,12 +72,11 @@ const Score = () => {
                 return <p key={index}> {round} </p>;
               })}
         </div>
-        {winner &&
-        <div className="winner">
-          {winner === "Nerešeno"
-            ? "Nema pobednika"
-            : `Pobednik je ${winner}`}
-        </div>}
+        {winner && (
+          <div className="winner">
+            {winner === "Nerešeno" ? "Nema pobednika" : `Pobednik je ${winner}`}
+          </div>
+        )}
       </div>
     </div>
   );
