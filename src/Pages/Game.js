@@ -4,10 +4,11 @@ import { useState, useEffect, useContext } from "react";
 import { useSocket } from "../Contexts/SocketContext";
 import { useNavigate } from "react-router-dom";
 
-//slike
+//slike i muzika
 import roundColor from "../Media/Round-color.png";
 import roundBlanco from "../Media/Round-blanco.png";
 import { LoginContext } from "../Contexts/LoginContext";
+import GameSong from "../Audio/GameSong";
 
 
 const Game = () => {
@@ -162,6 +163,7 @@ const Game = () => {
 
   return (
     <div className="game-main-wrapper">
+      <GameSong />
       <Navbar />
       <div className="game-wrapper">
         <div className="input-side">
