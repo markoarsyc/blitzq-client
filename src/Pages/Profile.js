@@ -16,23 +16,23 @@ const Profile = () => {
   const navigate = useNavigate();
 
   //statistika
-  const [games,setGames] = useState(0);
+  const [gamesPlayed,setGamesPlayed] = useState(0);
   const [win,setWin] = useState(0);
   const [draw,setDraw] = useState(0);
   const [defeat,setDefeat] = useState(0);
 
-  //ucitaj statistiku igraca
-  useEffect(()=>{
-    socket.emit("get-games-by-username",loggedInPlayer.username);
-    socket.on("games-list-by-username",(games)=>{
-      setGames(games.length);
+  useEffect(() => {
+    socket.emit("get-games-by-username", loggedInPlayer.username);
+  
+    const handleGamesList = (games) => {
+      setGamesPlayed(games.length);
       let winTemp = 0;
       let drawTemp = 0;
       let defeatTemp = 0;
       games.forEach(game => {
         if (loggedInPlayer.username === game.winner) {
           winTemp++;
-        } else if(game.winner === "Nerešeno") {
+        } else if (game.winner === "Nerešeno") {
           drawTemp++;
         } else {
           defeatTemp++;
@@ -41,8 +41,14 @@ const Profile = () => {
       setWin(winTemp);
       setDraw(drawTemp);
       setDefeat(defeatTemp);
-    })
-  },[])
+    };
+  
+    socket.on("games-list-by-username", handleGamesList);
+  
+    return () => {
+      socket.off("games-list-by-username", handleGamesList);
+    };
+  }, [loggedInPlayer.username, socket]);
 
   //log out
   const logOut = ()=> {
@@ -71,7 +77,7 @@ const Profile = () => {
         </div>
         <div className="property">
           <p>Broj partija</p>
-          <p className="field">{games}</p>
+          <p className="field">{gamesPlayed}</p>
         </div>
         <div className="property">
           <p>Pobede</p>
